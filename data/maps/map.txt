@@ -1,0 +1,110 @@
+StartPos -3.0 3.0
+StartDir E
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+0.0 0.0
+1.0 0.0
+1.0 1.0
+0.0 1.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+0.0 5.0
+1.0 5.0
+1.0 6.0
+0.0 6.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+5.0 0.0
+6.0 0.0
+6.0 1.0
+5.0 1.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+5.0 5.0
+6.0 5.0
+6.0 6.0
+5.0 6.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+10.0 0.0
+11.0 0.0
+11.0 1.0
+10.0 1.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+10.0 5.0
+11.0 5.0
+11.0 6.0
+10.0 6.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+15.0 0.0
+16.0 0.0
+16.0 1.0
+15.0 1.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+15.0 5.0
+16.0 5.0
+16.0 6.0
+15.0 6.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 1.0
+0.0 -4.0
+1.0 -4.0
+1.0 -5.0
+0.0 -5.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 2.0
+2.0 -4.0
+3.0 -4.0
+3.0 -5.0
+2.0 -5.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 3.0
+4.0 -4.0
+5.0 -4.0
+5.0 -5.0
+4.0 -5.0
+
+Sector
+Texture bird.jpg
+Floor 0.0
+Ceil 10.0
+-8.0 5.0
+-8.0 -5.0
+
+End
