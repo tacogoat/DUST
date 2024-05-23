@@ -127,18 +127,6 @@ class Map {
     }
   }
 
-  void rotate2(float theta, float camZ) {
-    this.shift(new PVector(0.0, -camZ / 200));
-    for (Sector s : this.sectors) {
-      for (Wall w : s.walls) {
-        // theta is negative so positive theta is counterclockwise
-        w.p1.rotate(-theta);
-        w.p2.rotate(-theta);
-      }
-    }
-    this.shift(new PVector(0.0, camZ / 200));
-  }
-
   String toString() {
     Utils u = new Utils();
     String s1 = "Src: " + this.src + "\n";

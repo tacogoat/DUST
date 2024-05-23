@@ -34,7 +34,7 @@ void setup() {
 
   you = new Player(m);
 
-  float fov = u.fovX2Y(110);
+  float fov = u.fovX2Y(90);
   cameraZ = (height / 2.0) / tan(fov / 2.0);
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
 
@@ -57,10 +57,10 @@ void draw() {
       you.move(passInput());
 
       float lookMag = (mouseX - width / 2) * mouseSens;
-      you.look(lookMag, cameraZ);
+      you.look(lookMag);
       r.mouseMove(width / 2, height / 2);
 
-      translate(width / 2, height / 2 + you.height, cameraZ / 3);
+      translate(width / 2, height / 2 + you.height, cameraZ);
       stroke(255); strokeWeight(2);
       drawWireframe();
       break;

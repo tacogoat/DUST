@@ -24,8 +24,8 @@ class Player {
     this.m.shift(new PVector(-this.v.x, -this.v.y));
   }
 
-  void look(float dTheta, float camZ) {
-    this.m.rotate2(dTheta, camZ);
+  void look(float dTheta) {
+    this.m.rotate(dTheta);
     // keep track of angle?
     // might need it for raycasting
   }
