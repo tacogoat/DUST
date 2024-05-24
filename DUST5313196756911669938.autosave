@@ -22,8 +22,6 @@ char rightKey = 'e';
 
 float cameraZ;
 
-PImage bird;
-
 void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
@@ -42,8 +40,6 @@ void setup() {
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
   camera(width / 2.0, height / 2.0, 0, width / 2.0, height / 2.0, -cameraZ, 0, 1, 0);
 
-  bird = loadImage("bird.jpg");
-
   try {
     r = new Robot();
   } catch (AWTException e) {
@@ -59,7 +55,7 @@ void draw() {
   switch (state) {
     case PLAY:
       background(20);
-      translate(width / 2, height / 2);
+      translate(width / 2, height / 2 + you.height);
 
       you.move(passMovementInput());
       // for some reason you can't look while moving with trackpad on my computer
@@ -73,9 +69,8 @@ void draw() {
       // fix: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
       r.mouseMove(width / 2, height / 2);
 
-      // stroke(255); strokeWeight(2);
-      // drawWireframe();
-      drawScene();
+      stroke(255); strokeWeight(2);
+      drawWireframe();
       break;
 
     case PAUSED:
@@ -98,10 +93,10 @@ void drawWireframe() {
     for (int j = 0; j < s.walls.size(); j++) {
       Wall w = s.walls.get(j);
 
-      PVector floorP1 = new PVector(w.p1.x, -s.floor + you.height, w.p1.y).mult(200);
-      PVector floorP2 = new PVector(w.p2.x, -s.floor + you.height, w.p2.y).mult(200);
-      PVector ceilP1 = new PVector(w.p1.x, -s.ceil + you.height, w.p1.y).mult(200);
-      PVector ceilP2 = new PVector(w.p2.x, -s.ceil + you.height, w.p2.y).mult(200);
+      PVector floorP1 = new PVector(w.p1.x, -s.floor, w.p1.y).mult(200);
+      PVector floorP2 = new PVector(w.p2.x, -s.floor, w.p2.y).mult(200);
+      PVector ceilP1 = new PVector(w.p1.x, -s.ceil, w.p1.y).mult(200);
+      PVector ceilP2 = new PVector(w.p2.x, -s.ceil, w.p2.y).mult(200);
 
       line(floorP1.x, floorP1.y, floorP1.z, floorP2.x, floorP2.y, floorP2.z);
       line(ceilP1.x, ceilP1.y, ceilP1.z, ceilP2.x, ceilP2.y, ceilP2.z);
@@ -116,20 +111,11 @@ void drawScene() {
     for (int j = 0; j < s.walls.size(); j++) {
       Wall w = s.walls.get(j);
 
-      PVector floorP1 = new PVector(w.p1.x, -s.floor + you.height, w.p1.y).mult(200);
-      PVector floorP2 = new PVector(w.p2.x, -s.floor + you.height, w.p2.y).mult(200);
-      PVector ceilP1 = new PVector(w.p1.x, -s.ceil + you.height, w.p1.y).mult(200);
-      PVector ceilP2 = new PVector(w.p2.x, -s.ceil + you.height, w.p2.y).mult(200);
+      PVector floorP1 = new PVector(w.p1.x, -s.floor, w.p1.y).mult(200);
+      PVector floorP2 = new PVector(w.p2.x, -s.floor, w.p2.y).mult(200);
+      PVector ceilP1 = new PVector(w.p1.x, -s.ceil, w.p1.y).mult(200);
+      PVector ceilP2 = new PVector(w.p2.x, -s.ceil, w.p2.y).mult(200);
 
-      PImage img = bird;
-
-      beginShape();
-        texture(img);
-        vertex(ceilP1.x, ceilP1.y, ceilP1.z, 0, 0);
-        vertex(ceilP2.x, ceilP2.y, ceilP2.z, img.width, 0);
-        vertex(floorP2.x, floorP2.y, floorP2.z, img.width, img.height);
-        vertex(floorP1.x, floorP1.y, floorP1.z, 0, img.height);
-      endShape();
     }
   }
 }

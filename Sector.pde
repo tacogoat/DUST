@@ -9,7 +9,7 @@ class Sector {
   Sector() {
     this.floor = 0.0;
     this.ceil = 0.0;
-    this.skin = null;
+    this.skin = loadImage("missing.jpg");
     this.walls = new ArrayList<Wall>();
   }
 

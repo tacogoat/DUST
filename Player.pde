@@ -3,7 +3,11 @@ class Player {
   PVector v;
   Map m;
   float theta; // may not be necessary
-  float height = 400;
+  float height = 2;
+
+  float vertTheta;
+
+  float mouseSens = 0.01;
 
   float maxV = 16.0;
   float vEase = 0.2;
@@ -24,8 +28,12 @@ class Player {
     this.m.shift(new PVector(-this.v.x, -this.v.y));
   }
 
-  void look(float dTheta) {
-    this.m.rotate(dTheta);
+  void look(PVector lookVals) {
+    lookVals.mult(mouseSens);
+    this.m.rotate(lookVals.x);
+    vertTheta += lookVals.y;
+    vertTheta = constrain(vertTheta, -HALF_PI, HALF_PI);
+    rotateX(vertTheta);
     // keep track of angle?
     // might need it for raycasting
   }
