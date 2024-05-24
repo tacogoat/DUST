@@ -30,7 +30,7 @@ void setup() {
 
   mouseSens = 0.01;
 
-  m = new Map("maps/ogMap.txt");
+  m = new Map("maps/newMap.txt");
   m.generate();
   m.init();
   println(m);
@@ -97,6 +97,7 @@ void drawWireframe() {
     Sector s = m.sectors.get(i);
     for (int j = 0; j < s.walls.size(); j++) {
       Wall w = s.walls.get(j);
+      if (w.isWindow = true) continue;
 
       PVector floorP1 = new PVector(w.p1.x, -s.floor + you.height, w.p1.y).mult(200);
       PVector floorP2 = new PVector(w.p2.x, -s.floor + you.height, w.p2.y).mult(200);
@@ -122,6 +123,8 @@ void drawScene() {
 
       floorPoints.add(floorP1);
       ceilPoints.add(ceilP1);
+
+      if (w.isWindow) continue;
 
       PImage img = s.skin;
 

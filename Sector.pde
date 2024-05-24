@@ -13,7 +13,7 @@ class Sector {
     this.ceil = 0.0;
     this.fColor = color(255);
     this.cColor = color(255);
-    this.skin = loadImage("missing.jpg");
+    this.skin = loadImage("missing.png");
     this.walls = new ArrayList<Wall>();
   }
 

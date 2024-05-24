@@ -19,6 +19,7 @@ class Map {
     String[] lineArr = loadStrings(src);
     ArrayList<String> elements = new ArrayList<String>();
     for (int i = 0; i < lineArr.length; i++) {
+      if (lineArr[i].indexOf("#") != -1) continue;
       Scanner s = new Scanner(lineArr[i]);
       while (s.hasNext()) {
         elements.add(s.next());
@@ -30,6 +31,7 @@ class Map {
     int currentSector = -1;
     int i = 0;
     ArrayList<PVector> tempPoints = new ArrayList<PVector>();
+    ArrayList<Boolean> windows = new ArrayList<Boolean>();
 
     while (i < elements.size()) {
       String current = elements.get(i);
@@ -40,12 +42,13 @@ class Map {
           // adds points in list to the last sector as walls
           for (int j = 0; j < tempPoints.size(); j++) {
             if (j == tempPoints.size() - 1) {
-              this.sectors.get(currentSector).add(new Wall(tempPoints.get(j).copy(), tempPoints.get(0).copy()));
+              this.sectors.get(currentSector).add(new Wall(tempPoints.get(j).copy(), tempPoints.get(0).copy(), windows.get(j)));
             } else {
-              this.sectors.get(currentSector).add(new Wall(tempPoints.get(j).copy(), tempPoints.get(j + 1).copy()));
+              this.sectors.get(currentSector).add(new Wall(tempPoints.get(j).copy(), tempPoints.get(j + 1).copy(), windows.get(j)));
             }
           }
           tempPoints = new ArrayList<PVector>();
+          windows = new ArrayList<Boolean>();
           if (current.equals("End")) break;
 
           // creates a new sector in this.sectors
@@ -108,11 +111,16 @@ class Map {
           i++;
           break;
 
+        case "Window":
+          windows.set(windows.size() - 1, true);
+          break;
+
         default:
           // if there is no keyword, coords are added as PVectors to tempPoints
           Float xVal = Float.parseFloat(current);
           Float zVal = Float.parseFloat(elements.get(i + 1));
           tempPoints.add(new PVector(xVal, -zVal));
+          windows.add(false);
           i++;
       }
       i++;

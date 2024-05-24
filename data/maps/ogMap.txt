@@ -1,6 +1,8 @@
 StartPos -3.0 3.0
 StartDir E
 
+# test comment
+this line is # still a comment
 Sector
 Texture bird.jpg
 Floor 0.0
@@ -107,8 +109,6 @@ Texture bird.jpg
 Floor 0.0
 Ceil 10.0
 -8.0 5.0
--8.0 -5.0
--8.1 -5.0
--8.1 5.0
+-8.0 -5.0 Window
 
 End
