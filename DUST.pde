@@ -111,17 +111,19 @@ void drawWireframe() {
 }
 
 void drawScene() {
-  for (int i = 0; i < m.sectors.size(); i++) {
-    Sector s = m.sectors.get(i);
-    for (int j = 0; j < s.walls.size(); j++) {
-      Wall w = s.walls.get(j);
-
+  for (Sector s : m.sectors) {
+    ArrayList<PVector> floorPoints = new ArrayList<PVector>();
+    ArrayList<PVector> ceilPoints = new ArrayList<PVector>();
+    for (Wall w : s.walls) {
       PVector floorP1 = new PVector(w.p1.x, -s.floor + you.height, w.p1.y).mult(200);
       PVector floorP2 = new PVector(w.p2.x, -s.floor + you.height, w.p2.y).mult(200);
       PVector ceilP1 = new PVector(w.p1.x, -s.ceil + you.height, w.p1.y).mult(200);
       PVector ceilP2 = new PVector(w.p2.x, -s.ceil + you.height, w.p2.y).mult(200);
 
-      PImage img = bird;
+      floorPoints.add(floorP1);
+      ceilPoints.add(ceilP1);
+
+      PImage img = s.skin;
 
       beginShape();
         texture(img);
@@ -131,6 +133,20 @@ void drawScene() {
         vertex(floorP1.x, floorP1.y, floorP1.z, 0, img.height);
       endShape();
     }
+
+    beginShape();
+      fill(s.fColor);
+      for (PVector p : floorPoints) {
+        vertex(p.x, p.y, p.z);
+      }
+    endShape();
+
+    beginShape();
+      fill(s.cColor);
+      for (PVector p : ceilPoints) {
+        vertex(p.x, p.y, p.z);
+      }
+    endShape();
   }
 }
 

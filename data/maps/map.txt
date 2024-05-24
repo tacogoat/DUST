@@ -93,6 +93,8 @@ Ceil 2.0
 
 Sector
 Texture bird.jpg
+FloorColor 255;0;0
+CeilColor 0;255;255
 Floor 0.0
 Ceil 3.0
 4.0 -4.0

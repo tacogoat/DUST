@@ -63,6 +63,34 @@ class Map {
           i++;
           break;
 
+        case "FloorColor":
+          Scanner parseFColor = new Scanner(elements.get(i + 1)).useDelimiter(";");
+          ArrayList<Integer> fColorVals = new ArrayList<Integer>();
+          while (parseFColor.hasNext()) {
+            fColorVals.add(parseFColor.nextInt());
+          }
+          if (fColorVals.size() > 1) {
+            this.sectors.get(currentSector).fColor = color(fColorVals.get(0), fColorVals.get(1), fColorVals.get(2));
+          } else {
+            this.sectors.get(currentSector).fColor = color(fColorVals.get(0));
+          }
+          i++;
+          break;
+
+        case "CeilColor":
+          Scanner parseCColor = new Scanner(elements.get(i + 1)).useDelimiter(";");
+          ArrayList<Integer> cColorVals = new ArrayList<Integer>();
+          while (parseCColor.hasNext()) {
+            cColorVals.add(parseCColor.nextInt());
+          }
+          if (cColorVals.size() > 1) {
+            this.sectors.get(currentSector).cColor = color(cColorVals.get(0), cColorVals.get(1), cColorVals.get(2));
+          } else {
+            this.sectors.get(currentSector).cColor = color(cColorVals.get(0));
+          }
+          i++;
+          break;
+
         case "StartPos":
           Float startP1 = Float.parseFloat(elements.get(i + 1));
           Float startP2 = Float.parseFloat(elements.get(i + 2));
