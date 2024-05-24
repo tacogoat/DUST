@@ -14,6 +14,7 @@ Utils u;
 // this is stupid fix it later
 int forward, back, right, left;
 
+// keybinds
 char forwardKey = ',';
 char backKey = 'o';
 char leftKey = 'a';
@@ -34,9 +35,10 @@ void setup() {
 
   you = new Player(m);
 
-  float fov = u.fovX2Y(90);
+  float fov = u.fovX2Y(110);
   cameraZ = (height / 2.0) / tan(fov / 2.0);
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
+  camera(width / 2.0, height / 2.0, 0, width / 2.0, height / 2.0, -cameraZ, 0, 1, 0);
 
   try {
     r = new Robot();
@@ -60,7 +62,7 @@ void draw() {
       you.look(lookMag);
       r.mouseMove(width / 2, height / 2);
 
-      translate(width / 2, height / 2 + you.height, cameraZ);
+      translate(width / 2, height / 2 + you.height);
       stroke(255); strokeWeight(2);
       drawWireframe();
       break;
