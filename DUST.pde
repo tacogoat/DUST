@@ -23,8 +23,10 @@ char rightKey = 'e';
 float cameraZ;
 float vertTheta;
 
+int mouseYOffset;
+
 void setup() {
-  fullScreen(P3D);
+  fullScreen(P3D, SPAN);
   u = new Utils();
 
   mouseSens = 0.01;
@@ -33,6 +35,9 @@ void setup() {
   m.generate();
   m.init();
   println(m);
+
+  println(width + " " + height);
+  println(displayWidth + " " + displayHeight);
 
   you = new Player(m);
 
@@ -73,7 +78,8 @@ void draw() {
       // this is because the panel at the top of my computer is 26 pixels
       // processing uses the coords of the window, java uses the coords of the screen
       // whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-      r.mouseMove(width / 2, 384 + 27);
+      // fix: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
+      r.mouseMove(width / 2, height / 2);
 
       stroke(255); strokeWeight(2);
       drawWireframe();
@@ -117,7 +123,7 @@ void keyPressed() {
   if (key == leftKey) {left = -1;}
   if (key == rightKey) {right = 1;}
   if (key == ' ' && (state == GameState.WAIT || state == GameState.PAUSED)) {
-    r.mouseMove(width / 2, height / 2 + 27);
+    r.mouseMove(width / 2, height / 2);
     state = GameState.PLAY;
   }
   if (keyCode == TAB  && state == GameState.PLAY) {
