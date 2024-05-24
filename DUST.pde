@@ -30,7 +30,7 @@ void setup() {
 
   mouseSens = 0.01;
 
-  m = new Map("maps/map.txt");
+  m = new Map("maps/ogMap.txt");
   m.generate();
   m.init();
   println(m);
