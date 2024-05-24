@@ -21,6 +21,7 @@ char leftKey = 'a';
 char rightKey = 'e';
 
 float cameraZ;
+float vertTheta;
 
 void setup() {
   fullScreen(P3D);
@@ -40,6 +41,8 @@ void setup() {
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
   camera(width / 2.0, height / 2.0, 0, width / 2.0, height / 2.0, -cameraZ, 0, 1, 0);
 
+  vertTheta = 0;
+
   try {
     r = new Robot();
   } catch (AWTException e) {
@@ -58,11 +61,20 @@ void draw() {
      
       you.move(passInput());
 
-      float lookMag = (mouseX - width / 2) * mouseSens;
-      you.look(lookMag);
-      r.mouseMove(width / 2, height / 2);
-
       translate(width / 2, height / 2 + you.height);
+
+      float xLookMag = (mouseX - width / 2) * mouseSens;
+      you.look(xLookMag);
+      float yLookMag = (mouseY - height / 2) * -mouseSens;
+      vertTheta += yLookMag;
+      rotateX(vertTheta);
+
+      // when it moves the mouse to the center of the screen it is 27 pixels off
+      // this is because the panel at the top of my computer is 26 pixels
+      // processing uses the coords of the window, java uses the coords of the screen
+      // whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+      r.mouseMove(width / 2, 384 + 27);
+
       stroke(255); strokeWeight(2);
       drawWireframe();
       break;
@@ -105,6 +117,7 @@ void keyPressed() {
   if (key == leftKey) {left = -1;}
   if (key == rightKey) {right = 1;}
   if (key == ' ' && (state == GameState.WAIT || state == GameState.PAUSED)) {
+    r.mouseMove(width / 2, height / 2 + 27);
     state = GameState.PLAY;
   }
   if (keyCode == TAB  && state == GameState.PLAY) {
