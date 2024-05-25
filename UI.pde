@@ -1,3 +1,13 @@
 class UI {
-  
+  void pauseMenu() {
+    background(0, 255, 255);
+    textSize(56);
+    text("paused - press space to resume", 0, height / 2, -cameraZ);
+  }
+
+  void waitScreen() {
+    background(255, 0, 0);
+    textSize(100);
+    text("start the game (space)", 0, height / 2, -cameraZ);
+  }
 }

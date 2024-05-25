@@ -10,6 +10,7 @@ GameState state;
 
 Map m;
 Utils u;
+UI ui;
 
 // this is stupid fix it later
 int forward, back, right, left;
@@ -27,6 +28,7 @@ PImage bird;
 void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
+  ui = new UI();
 
   mouseSens = 0.01;
 
@@ -41,8 +43,6 @@ void setup() {
   cameraZ = (height / 2.0) / tan(fov / 2.0);
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
   camera(width / 2.0, height / 2.0, 0, width / 2.0, height / 2.0, -cameraZ, 0, 1, 0);
-
-  bird = loadImage("bird.jpg");
 
   try {
     r = new Robot();
@@ -79,15 +79,11 @@ void draw() {
       break;
 
     case PAUSED:
-      background(255, 0, 0);
-      textSize(56);
-      text("paused - press space to resume", 0, height / 2, -cameraZ);
+      ui.pauseMenu();
       break;
 
     case WAIT:
-      background(255, 0, 0);
-      textSize(100);
-      text("start the game (space)", 0, height / 2, -cameraZ);
+      ui.waitScreen();
       break;
   }
 }
@@ -158,12 +154,16 @@ void keyPressed() {
   if (key == backKey) {back = 1;}
   if (key == leftKey) {left = -1;}
   if (key == rightKey) {right = 1;}
+
   if (key == ' ' && (state == GameState.WAIT || state == GameState.PAUSED)) {
     r.mouseMove(width / 2, height / 2);
     state = GameState.PLAY;
   }
+
   if (keyCode == TAB  && state == GameState.PLAY) {
     state = GameState.PAUSED;
+  } else if (state == GameState.PAUSED) {
+    state = GameState.PLAY;
   }
 }
 
