@@ -108,6 +108,7 @@ void drawWireframe() {
 }
 
 void drawScene() {
+  strokeWeight(0);
   for (Sector s : m.sectors) {
     ArrayList<PVector> floorPoints = new ArrayList<PVector>();
     ArrayList<PVector> ceilPoints = new ArrayList<PVector>();
@@ -149,6 +150,17 @@ void drawScene() {
   }
 }
 
+PVector passMovementInput() {
+  return new PVector(left + right, forward + back);
+}
+
+PVector passLookInput() { 
+  PVector input = new PVector();
+  input.x = (mouseX - width / 2);
+  input.y = -(mouseY - height / 2);
+  return input;
+}
+
 void keyPressed() {
   if (key == forwardKey) {forward = -1;}
   if (key == backKey) {back = 1;}
@@ -172,15 +184,4 @@ void keyReleased() {
   if (key == backKey) {back = 0;}
   if (key == leftKey) {left = 0;}
   if (key == rightKey) {right = 0;}
-}
-
-PVector passMovementInput() {
-  return new PVector(left + right, forward + back);
-}
-
-PVector passLookInput() { 
-  PVector input = new PVector();
-  input.x = (mouseX - width / 2);
-  input.y = -(mouseY - height / 2);
-  return input;
 }

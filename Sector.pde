@@ -7,6 +7,7 @@ class Sector {
   color cColor;
   PImage skin;
   ArrayList<Wall> walls;
+  ArrayList<Integer> adjacent;
 
   Sector() {
     this.floor = 0.0;
@@ -15,6 +16,7 @@ class Sector {
     this.cColor = color(255);
     this.skin = loadImage("missing.png");
     this.walls = new ArrayList<Wall>();
+    this.adjacent = new ArrayList<Integer>();
   }
 
   void add(Wall w) {this.walls.add(w);}

@@ -115,6 +115,16 @@ class Map {
           windows.set(windows.size() - 1, true);
           break;
 
+        case "Adjacent":
+          Scanner parseAdjacent = new Scanner(elements.get(i + 1)).useDelimiter(";");
+          ArrayList<Integer> adjacentPoints = new ArrayList<Integer>();
+          while (parseAdjacent.hasNext()) {
+            adjacentPoints.add(parseAdjacent.nextInt());
+          }
+          this.sectors.get(currentSector).adjacent = adjacentPoints;
+          i++;
+          break;
+
         default:
           // if there is no keyword, coords are added as PVectors to tempPoints
           Float xVal = Float.parseFloat(current);

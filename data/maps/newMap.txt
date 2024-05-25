@@ -3,8 +3,11 @@
 StartPos 6 4
 StartDir N
 
-# starter room
+
+# 0: starter room
+
 Sector
+Adjacent 2
 Texture bird.jpg
 Floor 0
 Ceil 10
@@ -16,7 +19,9 @@ Ceil 10
 3 12
 11 12 Window
 
-# transition (starter room to diagonal hall)
+
+# 1: transition (starter room to diagonal hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -24,8 +29,11 @@ Ceil 10
 11 12
 14 9 Window
 
-# diagonal hall
+
+# 2: diagonal hall
+
 Sector
+Adjacent 0;4
 FloorColor 0
 CeilColor 0
 Floor 0
@@ -35,7 +43,9 @@ Ceil 6
 18 13 Window
 15 16
 
-# transition (hexagon room to diagonal hall)
+
+# 3: transition (hexagon room to diagonal hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -43,8 +53,11 @@ Ceil 14
 18 13
 15 16 Window
 
-# hexagon room
+
+# 4: hexagon room
+
 Sector
+Adjacent 2;6;10;14
 Texture bird.jpg
 Floor 0
 Ceil 14
@@ -63,7 +76,9 @@ Ceil 14
 14 23
 14 17
 
-# transition (hexagon room to small hall)
+
+# 5: transition (hexagon room to small hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -71,8 +86,11 @@ Ceil 14
 20 12
 24 12 Window
 
-# small hall
+
+# 6: small hall
+
 Sector
+Adjacent 4;8
 FloorColor 0
 CeilColor 0
 Floor 0
@@ -82,7 +100,9 @@ Ceil 6
 24 10 Window
 20 10
 
-# transition (square room to small hall)
+
+# 7: transition (square room to small hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -90,8 +110,11 @@ Ceil 10
 20 10
 24 10 Window
 
-# square room
+
+# 8: square room
+
 Sector
+Adjacent 6
 Texture bird.jpg
 Floor 0
 Ceil 10
@@ -102,7 +125,9 @@ Ceil 10
 29 0
 17 0
 
-# transition (hexagon room to long hall)
+
+# 9: transition (hexagon room to long hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -110,8 +135,11 @@ Ceil 14
 23 23
 27 23 Window
 
-# long hall
+
+# 10: long hall
+
 Sector
+Adjacent 4;12
 FloorColor 0
 CeilColor 0
 Floor 0
@@ -123,7 +151,9 @@ Ceil 6
 6 33
 23 33
 
-# transition (secret room to long hall)
+
+# 11: transition (secret room to long hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -131,7 +161,9 @@ Ceil 8
 6 37
 6 33 Window
 
-# secret room
+
+# 12: secret room
+
 Sector
 Texture bird.jpg
 Floor 0
@@ -143,7 +175,9 @@ Ceil 8
 0 32
 0 38
 
-# transition (hexagon room to square hall)
+
+# 13: transition (hexagon room to square hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -151,7 +185,9 @@ Ceil 14
 20 23
 16 23 Window
 
-# square hall
+
+# 14: square hall
+
 Sector
 FloorColor 0
 CeilColor 0
@@ -162,7 +198,9 @@ Ceil 6
 16 27 Window
 20 27
 
-# transition (weird room to square hall)
+
+# 15: transition (weird room to square hall)
+
 Sector
 Texture bird.jpg
 Floor 6
@@ -170,7 +208,9 @@ Ceil 14
 16 27 Window
 20 27
 
-# weird room
+
+# 16: weird room
+
 Sector
 Texture bird.jpg
 Floor 0
