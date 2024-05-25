@@ -4,6 +4,7 @@ StartPos 6 4
 StartDir N
 
 
+
 # 0: starter room
 
 Sector
@@ -20,14 +21,17 @@ Ceil 10
 11 12 Window
 
 
+
 # 1: transition (starter room to diagonal hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 10
 11 12
 14 9 Window
+
 
 
 # 2: diagonal hall
@@ -44,14 +48,17 @@ Ceil 6
 15 16
 
 
+
 # 3: transition (hexagon room to diagonal hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 14
 18 13
 15 16 Window
+
 
 
 # 4: hexagon room
@@ -77,14 +84,17 @@ Ceil 14
 14 17
 
 
+
 # 5: transition (hexagon room to small hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 14
 20 12
 24 12 Window
+
 
 
 # 6: small hall
@@ -101,14 +111,17 @@ Ceil 6
 20 10
 
 
+
 # 7: transition (square room to small hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 10
 20 10
 24 10 Window
+
 
 
 # 8: square room
@@ -126,14 +139,17 @@ Ceil 10
 17 0
 
 
+
 # 9: transition (hexagon room to long hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 14
 23 23
 27 23 Window
+
 
 
 # 10: long hall
@@ -152,14 +168,17 @@ Ceil 6
 23 33
 
 
+
 # 11: transition (secret room to long hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 8
 6 37
 6 33 Window
+
 
 
 # 12: secret room
@@ -176,14 +195,17 @@ Ceil 8
 0 38
 
 
+
 # 13: transition (hexagon room to square hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 14
 20 23
 16 23 Window
+
 
 
 # 14: square hall
@@ -199,14 +221,17 @@ Ceil 6
 20 27
 
 
+
 # 15: transition (weird room to square hall)
 
 Sector
+NoClip
 Texture bird.jpg
 Floor 6
 Ceil 14
 16 27 Window
 20 27
+
 
 
 # 16: weird room

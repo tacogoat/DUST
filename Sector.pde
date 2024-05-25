@@ -8,6 +8,7 @@ class Sector {
   PImage skin;
   ArrayList<Wall> walls;
   ArrayList<Integer> adjacent;
+  boolean noClip;
 
   Sector() {
     this.floor = 0.0;
@@ -17,6 +18,7 @@ class Sector {
     this.skin = loadImage("missing.png");
     this.walls = new ArrayList<Wall>();
     this.adjacent = new ArrayList<Integer>();
+    this.noClip = false;
   }
 
   void add(Wall w) {this.walls.add(w);}

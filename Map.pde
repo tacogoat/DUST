@@ -125,6 +125,10 @@ class Map {
           i++;
           break;
 
+        case "NoClip":
+          this.sectors.get(currentSector).noClip = true;
+          break;
+
         default:
           // if there is no keyword, coords are added as PVectors to tempPoints
           Float xVal = Float.parseFloat(current);
