@@ -61,7 +61,7 @@ void draw() {
       background(20);
       translate(width / 2, height / 2);
 
-      you.move(passMovementInput());
+      you.moveV(passMovementInput());
       // for some reason you can't look while moving with trackpad on my computer
       // mouse works fine
       you.look(passLookInput());
