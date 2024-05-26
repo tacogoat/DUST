@@ -77,6 +77,7 @@ void draw() {
       // drawWireframe();
       drawScene();
 
+      rotateX(-you.vertTheta); // this line will be important for drawing UI later
       textSize(40); fill(0, 255, 0);
       text(you.currentSector, 0, 0, -cameraZ / 2);
       break;

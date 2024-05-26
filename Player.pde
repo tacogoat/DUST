@@ -45,8 +45,19 @@ class Player {
   }
 
   int getSector() {
-    if (isInSector(this.currentSector)) {
+    // check all sectors if player is out of bounds
+    if (this.currentSector == -1) {
+      for (int i = 0; i < this.m.sectors.size(); i++) {
+        if (isInSector(i)) {
+          return i;
+        }
+      }
+
+    // check if player has left the current sector
+    } else if (isInSector(this.currentSector)) {
       return this.currentSector;
+
+    // check only adjacent sectors if player is not in its former sector
     } else {
       ArrayList<Integer> adjacentSectors = this.m.sectors.get(this.currentSector).adjacent;
       for (int i = 0; i < adjacentSectors.size(); i++) {
@@ -55,7 +66,8 @@ class Player {
         }
       }
     }
-    return 0; // -1; negative 1 crashes it
+
+    return -1; // player is out of bounds
   }
 
   boolean isInSector(int sectorIndex) {
