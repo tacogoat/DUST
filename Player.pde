@@ -4,6 +4,7 @@ class Player {
   Map m;
   float theta; // may not be necessary
   float height = 2;
+  int currentSector;
 
   float vertTheta;
 
@@ -15,26 +16,18 @@ class Player {
   Player(Map m_) {
     this.v = new PVector(0.0, 0.0);
     this.m = m_;
-  }
-
-  void move(PVector input) {
-    float xMag = input.x * maxV / 60;
-    float zMag = input.y * maxV / 60;
-    this.v.x = lerp(this.v.x, xMag, vEase);
-    this.v.y = lerp(this.v.y, zMag, vEase);
-
-    // potentially keep track of player position values, may be needed for something else
-
-    this.m.shift(new PVector(-this.v.x, -this.v.y));
+    this.currentSector = m_.startSect;
   }
   
-  void moveV(PVector input) {
+  void move(PVector input) {
     float xMag = input.x;
     float zMag = input.y;
     PVector vMag = new PVector(xMag, zMag);
     vMag.normalize().mult(maxV / 60);
     this.v.x = lerp(this.v.x, vMag.x, vEase);
     this.v.y = lerp(this.v.y, vMag.y, vEase);
+
+    this.currentSector = getSector();
 
     // potentially keep track of player position values, may be needed for something else
 
@@ -49,5 +42,35 @@ class Player {
     rotateX(vertTheta);
     // keep track of angle?
     // might need it for raycasting
+  }
+
+  int getSector() {
+    if (isInSector(this.currentSector)) {
+      return this.currentSector;
+    } else {
+      ArrayList<Integer> adjacentSectors = this.m.sectors.get(this.currentSector).adjacent;
+      for (int i = 0; i < adjacentSectors.size(); i++) {
+        if (isInSector(adjacentSectors.get(i))) {
+          return adjacentSectors.get(i);
+        }
+      }
+    }
+    return 0; // -1; negative 1 crashes it
+  }
+
+  boolean isInSector(int sectorIndex) {
+    Utils u = new Utils();
+    PVector testLine = new PVector(-200.0, 0.0);
+    Sector s = m.sectors.get(sectorIndex);
+
+    int intersections = 0;
+    for (int i = 0; i < s.walls.size(); i++) {
+      Wall w = s.walls.get(i);
+      if (u.intersectExists(new PVector(0.0, 0.0), testLine, w.p1, w.p2)) {
+        intersections++;
+      }
+    }
+    
+    return intersections % 2 != 0;
   }
 }

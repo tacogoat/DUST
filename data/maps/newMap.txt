@@ -2,6 +2,7 @@
 
 StartPos 6 4
 StartDir N
+StartSect 0
 
 
 
@@ -184,6 +185,7 @@ Ceil 8
 # 12: secret room
 
 Sector
+Adjacent 10
 Texture bird.jpg
 Floor 0
 Ceil 8
@@ -211,6 +213,7 @@ Ceil 14
 # 14: square hall
 
 Sector
+Adjacent 4;16
 FloorColor 0
 CeilColor 0
 Floor 0
@@ -237,6 +240,7 @@ Ceil 14
 # 16: weird room
 
 Sector
+Adjacent 14
 Texture bird.jpg
 Floor 0
 Ceil 14

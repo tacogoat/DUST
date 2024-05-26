@@ -61,7 +61,7 @@ void draw() {
       background(20);
       translate(width / 2, height / 2);
 
-      you.moveV(passMovementInput());
+      you.move(passMovementInput());
       // for some reason you can't look while moving with trackpad on my computer
       // mouse works fine
       you.look(passLookInput());
@@ -76,6 +76,9 @@ void draw() {
       // stroke(255); strokeWeight(2);
       // drawWireframe();
       drawScene();
+
+      textSize(40); fill(0, 255, 0);
+      text(you.currentSector, 0, 0, -cameraZ / 2);
       break;
 
     case PAUSED:

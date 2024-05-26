@@ -5,12 +5,14 @@ class Map {
   ArrayList<Sector> sectors;
   PVector startPos;
   Dir startDir;
+  int startSect;
   String src;
 
   Map(String src_) {
     this.sectors = new ArrayList<Sector>();
     this.startPos = new PVector(0.0, 0.0);
     this.startDir = Dir.N;
+    this.startSect = -1;
     this.src = src_;
   }
 
@@ -103,6 +105,11 @@ class Map {
 
         case "StartDir":
           this.startDir = Dir.valueOf(elements.get(i + 1));
+          i++;
+          break;
+
+        case "StartSect":
+          this.startSect = Integer.parseInt(elements.get(i + 1));
           i++;
           break;
 
