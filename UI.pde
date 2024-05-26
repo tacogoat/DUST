@@ -10,4 +10,10 @@ class UI {
     textSize(100);
     text("start the game (space)", 0, height / 2, -cameraZ);
   }
+
+  void debugCurrentSector() {
+    rotateX(-you.vertTheta); // this line will be important for drawing UI later
+    textSize(1); fill(0, 255, 0);
+    text(you.currentSector, -10, -5, -10);
+  }
 }
