@@ -19,19 +19,42 @@ class Player {
     this.currentSector = m_.startSect;
   }
   
-  void move(PVector input) {
-    float xMag = input.x;
-    float zMag = input.y;
-    PVector vMag = new PVector(xMag, zMag);
-    vMag.normalize().mult(maxV / 60);
+  void move(PVector input, boolean rawInput) {
+    Utils u = new Utils();
+    this.currentSector = getSector();
+    
+    PVector vMag;
+    if (rawInput) {
+      vMag = new PVector(input.x, input.y);
+      vMag.normalize().mult(maxV / 60);
+    } else {
+      vMag = input;
+    }
+
     this.v.x = lerp(this.v.x, vMag.x, vEase);
     this.v.y = lerp(this.v.y, vMag.y, vEase);
 
-    this.currentSector = getSector();
+    for (Wall w : this.m.sectors.get(this.currentSector).walls) {
+      if (w.isWindow) continue;
+      if (u.intersectExists(new PVector(0.0, 0.0), new PVector(v.x * 2, v.y * 2), w.p1, w.p2)) {
+        this.handleCollision(w, input);
+        return;
+      }
+    }
 
     // potentially keep track of player position values, may be needed for something else
 
     this.m.shift(new PVector(-this.v.x, -this.v.y));
+  }
+
+  void handleCollision(Wall w, PVector input) {
+    PVector wallNormal = new PVector(w.p2.x - w.p1.x, w.p2.y - w.p1.y);
+    wallNormal.rotate(HALF_PI);
+    float dot = PVector.dot(input, wallNormal); 
+    // my implementation didn't work very well so I looked up the formula
+    // youtube.com/watch?v=oom6R-M2lvQ
+    PVector motion = input.sub(wallNormal.mult(dot));
+    this.move(motion, true);
   }
 
   void look(PVector lookVals) {
