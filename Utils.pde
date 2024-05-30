@@ -17,4 +17,11 @@ class Utils {
               ((p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x));
     return t >= 0.0 && t <= 1.0 && u >= 0.0 && u <= 1.0;
   }
+
+  PVector proj(PVector u, PVector v) {
+    // projection of vector u through vector v
+    float dot = PVector.dot(u, v);
+    float den = v.mag() * v.mag();
+    return PVector.mult(v, dot / den);
+  }
 }

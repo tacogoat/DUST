@@ -66,18 +66,11 @@ void draw() {
       // mouse works fine
       you.look(passLookInput());
 
-      // when it moves the mouse to the center of the screen it is 27 pixels off
-      // this is because the panel at the top of my computer is 26 pixels
-      // processing uses the coords of the window, java uses the coords of the screen
-      // whyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
-      // fix: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
+      // fix for windowing issues: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
       r.mouseMove(width / 2, height / 2);
 
-      // stroke(255); strokeWeight(2);
-      // drawWireframe();
+      drawLights();
       drawScene();
-
-      ui.debugCurrentSector();
       break;
 
     case PAUSED:
@@ -87,25 +80,6 @@ void draw() {
     case WAIT:
       ui.waitScreen();
       break;
-  }
-}
-
-void drawWireframe() {
-  for (int i = 0; i < m.sectors.size(); i++) {
-    Sector s = m.sectors.get(i);
-    for (int j = 0; j < s.walls.size(); j++) {
-      Wall w = s.walls.get(j);
-      if (w.isWindow = true) continue;
-
-      PVector floorP1 = new PVector(w.p1.x, -s.floor + you.height, w.p1.y).mult(200);
-      PVector floorP2 = new PVector(w.p2.x, -s.floor + you.height, w.p2.y).mult(200);
-      PVector ceilP1 = new PVector(w.p1.x, -s.ceil + you.height, w.p1.y).mult(200);
-      PVector ceilP2 = new PVector(w.p2.x, -s.ceil + you.height, w.p2.y).mult(200);
-
-      line(floorP1.x, floorP1.y, floorP1.z, floorP2.x, floorP2.y, floorP2.z);
-      line(ceilP1.x, ceilP1.y, ceilP1.z, ceilP2.x, ceilP2.y, ceilP2.z);
-      line(floorP1.x, floorP1.y, floorP1.z, ceilP1.x, ceilP1.y, ceilP1.z);
-    }
   }
 }
 
@@ -149,6 +123,13 @@ void drawScene() {
         vertex(p.x, p.y, p.z);
       }
     endShape();
+  }
+}
+
+void drawLights() {
+  ambientLight(0, 0, 0);
+  for (LightData l : m.lights) {
+    pointLight(l.r, l.g, l.b, l.x, l.y, l.z);
   }
 }
 

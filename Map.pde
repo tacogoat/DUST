@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 class Map {
   ArrayList<Sector> sectors;
+  ArrayList<Enemy> enemies;
+  ArrayList<LightData> lights;
   PVector startPos;
   Dir startDir;
   int startSect;
@@ -10,6 +12,7 @@ class Map {
 
   Map(String src_) {
     this.sectors = new ArrayList<Sector>();
+    this.lights = new ArrayList<LightData>();
     this.startPos = new PVector(0.0, 0.0);
     this.startDir = Dir.N;
     this.startSect = -1;
@@ -31,6 +34,7 @@ class Map {
     
     // create sectors from elements of map file ArrayList
     int currentSector = -1;
+    int currentLight = -1;
     int i = 0;
     ArrayList<PVector> tempPoints = new ArrayList<PVector>();
     ArrayList<Boolean> windows = new ArrayList<Boolean>();
@@ -74,6 +78,7 @@ class Map {
           while (parseFColor.hasNext()) {
             fColorVals.add(parseFColor.nextInt());
           }
+          parseFColor.close();
           if (fColorVals.size() > 1) {
             this.sectors.get(currentSector).fColor = color(fColorVals.get(0), fColorVals.get(1), fColorVals.get(2));
           } else {
@@ -88,6 +93,7 @@ class Map {
           while (parseCColor.hasNext()) {
             cColorVals.add(parseCColor.nextInt());
           }
+          parseCColor.close();
           if (cColorVals.size() > 1) {
             this.sectors.get(currentSector).cColor = color(cColorVals.get(0), cColorVals.get(1), cColorVals.get(2));
           } else {
@@ -128,12 +134,36 @@ class Map {
           while (parseAdjacent.hasNext()) {
             adjacentPoints.add(parseAdjacent.nextInt());
           }
+          parseAdjacent.close();
           this.sectors.get(currentSector).adjacent = adjacentPoints;
           i++;
           break;
 
         case "NoClip":
           this.sectors.get(currentSector).noClip = true;
+          break;
+
+        case "Light":
+          currentLight++;
+          this.lights.add(new LightData());
+          break;
+
+        case "LightColor":
+          Scanner parseLColor = new Scanner(elements.get(i + 1)).useDelimiter(";");
+          this.lights.get(currentLight).r = parseLColor.nextInt();
+          this.lights.get(currentLight).g = parseLColor.nextInt();
+          this.lights.get(currentLight).b = parseLColor.nextInt();
+          parseLColor.close();
+          i++;
+          break;
+
+        case "LightPosition":
+          Scanner parseLPosition = new Scanner(elements.get(i + 1)).useDelimiter(";");
+          this.lights.get(currentLight).x = parseLPosition.nextFloat();
+          this.lights.get(currentLight).y = parseLPosition.nextFloat();
+          this.lights.get(currentLight).z = parseLPosition.nextFloat();
+          parseLPosition.close();
+          i++;
           break;
 
         default:
@@ -172,6 +202,12 @@ class Map {
         w.p2.add(v);
       }
     }
+    for (LightData l : this.lights) {
+      PVector lPos = new PVector(l.x, l.z);
+      lPos.add(v);
+      l.x = lPos.x;
+      l.z = lPos.y;
+    }
   }
   
   void rotate(float theta) {
@@ -181,6 +217,12 @@ class Map {
         w.p1.rotate(-theta);
         w.p2.rotate(-theta);
       }
+    }
+    for (LightData l : this.lights) {
+      PVector lPos = new PVector(l.x, l.z);
+      lPos.rotate(-theta);
+      l.x = lPos.x;
+      l.z = lPos.y;
     }
   }
 
