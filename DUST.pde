@@ -52,6 +52,9 @@ void setup() {
 }
 
 void draw() {
+  // fix for windowing issues: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
+  r.mouseMove(width / 2, height / 2);
+
   switch (state) {
     case PLAY:
       background(20);
@@ -61,9 +64,6 @@ void draw() {
       // for some reason you can't look while moving with trackpad on my computer
       // mouse works fine
       you.look(passLookInput());
-
-      // fix for windowing issues: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
-      r.mouseMove(width / 2, height / 2);
 
       // lightFalloff(1.0, 0.0001, 0.0);
       // drawLights();

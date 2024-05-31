@@ -50,3 +50,6 @@ Potential issues:
 ## Update DUST.pde
 - maps are loaded and player is created when map is selected
 - rework input system to something more manageable
+
+## Lights
+- maybe remove lights
