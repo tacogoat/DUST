@@ -47,5 +47,6 @@ Spawning:
 Potential issues:
 - enemy positions and targeting locations will need to move with the map when the player moves
 
-## UI
-- draw 
+## Update DUST.pde
+- maps are loaded and player is created when map is selected
+- rework input system to something more manageable

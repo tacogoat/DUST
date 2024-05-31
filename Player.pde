@@ -8,16 +8,18 @@ class Player {
 
   float vertTheta;
 
-  float mouseSens = 0.01;
+  float mouseSens;
 
   float maxV = 16.0;
   float vEase = 0.2;
-  float jumpV = 16.0;
 
-  Player(Map m_) {
+  float collisionConstant = 4.0;
+
+  Player(Map m_, int sens) {
     this.v = new PVector(0.0, 0.0);
     this.m = m_;
     this.currentSector = m_.startSect;
+    this.mouseSens = sens / 15000.0;
   }
   
   void move(PVector input, boolean rawInput) {
@@ -39,8 +41,9 @@ class Player {
     if (this.currentSector != -1) {
       for (Wall w : this.m.sectors.get(this.currentSector).walls) {
         if (w.isWindow) continue;
-        if (u.intersectExists(new PVector(0.0, 0.0), new PVector(v.x * 2, v.y * 2), w.p1, w.p2)) {
-          this.handleCollision(w, input);
+        if (u.intersectExists(new PVector(0.0, 0.0),
+                              new PVector(v.x * this.collisionConstant, v.y * this.collisionConstant), w.p1, w.p2)) {
+          this.handleCollision(w, input.normalize());
           return;
         }
       }
@@ -48,8 +51,9 @@ class Player {
         Sector s = this.m.sectors.get(i);
         for (Wall w : s.walls) {
           if (w.isWindow) continue;
-          if (u.intersectExists(new PVector(0.0, 0.0), new PVector(v.x * 2, v.y * 2), w.p1, w.p2)) {
-            this.handleCollision(w, input);
+          if (u.intersectExists(new PVector(0.0, 0.0),
+                                new PVector(v.x * this.collisionConstant, v.y * this.collisionConstant), w.p1, w.p2)) {
+            this.handleCollision(w, input.normalize());
             return;
           }
         }

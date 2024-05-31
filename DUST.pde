@@ -4,7 +4,8 @@ import java.awt.AWTException;
 Player you;
 Robot r;
 
-float mouseSens;
+int chooseMouseSens = 150;
+int chooseFov = 110;
 
 GameState state;
 
@@ -12,7 +13,6 @@ Map m;
 Utils u;
 UI ui;
 
-// this is stupid fix it later
 int forward, back, right, left;
 
 // keybinds
@@ -21,35 +21,31 @@ char backKey = 'o';
 char leftKey = 'a';
 char rightKey = 'e';
 
-float cameraZ;
-
-PImage bird;
+float cameraZ; // distance between eye of camera and display
 
 void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
-  ui = new UI();
-
-  mouseSens = 0.01;
 
   m = new Map("maps/newMap.txt");
   m.generate();
   m.init();
   println(m);
 
-  you = new Player(m);
+  you = new Player(m, chooseMouseSens);
 
-  float fov = u.fovX2Y(110);
+  float fov = u.fovX2Y(chooseFov);
   cameraZ = (height / 2.0) / tan(fov / 2.0);
   perspective(fov, (float) width / height, cameraZ / 100.0, cameraZ * 100.0);
   camera(width / 2.0, height / 2.0, 0, width / 2.0, height / 2.0, -cameraZ, 0, 1, 0);
+
+  ui = new UI(-cameraZ);
 
   try {
     r = new Robot();
   } catch (AWTException e) {
     e.printStackTrace();
   }
-  r.mouseMove(width / 2, height / 2);
   noCursor();
 
   state = GameState.WAIT;
@@ -69,11 +65,12 @@ void draw() {
       // fix for windowing issues: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
       r.mouseMove(width / 2, height / 2);
 
-      drawLights();
+      // lightFalloff(1.0, 0.0001, 0.0);
+      // drawLights();
       drawScene();
       break;
 
-    case PAUSED:
+    case M_PAUSED:
       ui.pauseMenu();
       break;
 
@@ -145,26 +142,26 @@ PVector passLookInput() {
 }
 
 void keyPressed() {
-  if (key == forwardKey) {forward = -1;}
-  if (key == backKey) {back = 1;}
-  if (key == leftKey) {left = -1;}
-  if (key == rightKey) {right = 1;}
+  if (key == forwardKey) forward = -1;
+  if (key == backKey) back = 1;
+  if (key == leftKey) left = -1;
+  if (key == rightKey) right = 1;
 
-  if (key == ' ' && (state == GameState.WAIT || state == GameState.PAUSED)) {
+  if (key == ' ' && (state == GameState.WAIT || state == GameState.M_PAUSED)) {
     r.mouseMove(width / 2, height / 2);
     state = GameState.PLAY;
   }
 
   if (keyCode == TAB  && state == GameState.PLAY) {
-    state = GameState.PAUSED;
-  } else if (state == GameState.PAUSED) {
+    state = GameState.M_PAUSED;
+  } else if (state == GameState.M_PAUSED) {
     state = GameState.PLAY;
   }
 }
 
 void keyReleased() {
-  if (key == forwardKey) {forward = 0;}
-  if (key == backKey) {back = 0;}
-  if (key == leftKey) {left = 0;}
-  if (key == rightKey) {right = 0;}
+  if (key == forwardKey) forward = 0;
+  if (key == backKey) back = 0;
+  if (key == leftKey) left = 0;
+  if (key == rightKey) right = 0;
 }

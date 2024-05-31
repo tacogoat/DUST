@@ -1,5 +1,7 @@
 enum GameState {
   PLAY,
-  PAUSED,
-  WAIT
+  M_PAUSED,
+  WAIT,
+  M_START,
+  M_OPTIONS
 }

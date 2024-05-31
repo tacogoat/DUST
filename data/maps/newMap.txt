@@ -88,13 +88,13 @@ Ceil 14
 
 # test light (hexagon room)
 
-# Light
-# LightColor 255;0;0
-# LightPosition 22;14;18
-
 Light
-LightColor 100;100;100
-LightPosition 7.5;10;5.5
+LightColor 255;255;255
+LightPosition 22;14;18
+
+# Light
+# LightColor 100;100;100
+# LightPosition 7.5;10;5.5
 
 
 
