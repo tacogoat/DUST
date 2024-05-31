@@ -142,26 +142,43 @@ PVector passLookInput() {
 }
 
 void keyPressed() {
-  if (key == forwardKey) forward = -1;
-  if (key == backKey) back = 1;
-  if (key == leftKey) left = -1;
-  if (key == rightKey) right = 1;
+  switch (state) {
+    case PLAY:
+      if (key == forwardKey) forward = -1;
+      if (key == backKey) back = 1;
+      if (key == leftKey) left = -1;
+      if (key == rightKey) right = 1;
 
-  if (key == ' ' && (state == GameState.WAIT || state == GameState.M_PAUSED)) {
-    r.mouseMove(width / 2, height / 2);
-    state = GameState.PLAY;
-  }
+      if (keyCode == TAB) {
+        state = GameState.M_PAUSED;
+      }
+      break;
 
-  if (keyCode == TAB  && state == GameState.PLAY) {
-    state = GameState.M_PAUSED;
-  } else if (state == GameState.M_PAUSED) {
-    state = GameState.PLAY;
+    case WAIT:
+      r.mouseMove(width / 2, height / 2);
+      state = GameState.PLAY;
+      break;
+
+    case M_PAUSED:
+      if (key == ' ') {
+        r.mouseMove(width / 2, height / 2);
+        state = GameState.PLAY;
+      }
+
+      if (keyCode == TAB) {
+        state = GameState.PLAY;
+      }
+      break;
   }
 }
 
 void keyReleased() {
-  if (key == forwardKey) forward = 0;
-  if (key == backKey) back = 0;
-  if (key == leftKey) left = 0;
-  if (key == rightKey) right = 0;
+  switch (state) {
+    case PLAY:
+      if (key == forwardKey) forward = 0;
+      if (key == backKey) back = 0;
+      if (key == leftKey) left = 0;
+      if (key == rightKey) right = 0;
+      break;
+  }
 }

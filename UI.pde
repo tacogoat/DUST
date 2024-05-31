@@ -23,7 +23,7 @@ class UI {
 
     background(255, 0, 0);
     textSize(100); fill(255);
-    text("start the game (space)", 0, height / 2, this.offset);
+    text("press any key to start", 0, height / 2, this.offset);
 
     hint(ENABLE_DEPTH_TEST);
   }
