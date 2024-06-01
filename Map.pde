@@ -179,6 +179,7 @@ class Map {
   }
 
   void init() {
+    this.generate();
     this.shift(new PVector(-this.startPos.x, -this.startPos.y));
     switch (this.startDir) {
       case N:

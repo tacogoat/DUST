@@ -1,19 +1,102 @@
 class UI {
   float offset;
 
+  int itemSelected;
+
   color selectionColor = color(255, 0, 0);
-  color textColor = color(255, 255, 255);
+  color textColor = color(255);
 
   UI(float z) {
     this.offset = z;
+    this.itemSelected = 0;
+  }
+
+  void navigateUI() {
+    if (key == forwardKey || keyCode == UP) this.itemSelected--;
+    if (key == backKey || keyCode == DOWN) this.itemSelected++;
+  }
+
+  void clampUINav(ArrayList<String> list) {
+    if (this.itemSelected < 0) this.itemSelected = list.size() - 1;
+    if (this.itemSelected >= list.size()) this.itemSelected = 0;
+  }
+
+  boolean isSelectKey() {
+    return key == ' ' ||
+           key == ENTER ||
+           key == RETURN;
+  }
+
+  void startMenu() {
+    hint(DISABLE_DEPTH_TEST);
+
+    background(20);
+    textAlign(CENTER, TOP); textSize(100); fill(255);
+    text("DUST", 0, -300, this.offset);
+
+    ArrayList<String> items = new ArrayList<String>();
+    items.add("Level Select");
+    items.add("Options");
+    items.add("test item");
+
+    this.clampUINav(items);
+    int textY = -50;
+    textSize(80);
+    for (int i = 0; i < items.size(); i++) {
+      if (i == this.itemSelected) {
+        fill(selectionColor);
+      } else {
+        fill(textColor);
+      }
+      text(items.get(i), 0, textY, this.offset);
+      textY += 100;
+    }
+
+    hint(ENABLE_DEPTH_TEST);
+  }
+
+  void levels() {
+    hint(DISABLE_DEPTH_TEST);
+
+    background(20);
+    textAlign(CENTER, TOP); textSize(80); fill(255);
+    text("Level Select", 0, -300, this.offset);
+
+    ArrayList<String> levels = new ArrayList<String>();
+    levels.add("Castle of Torment");
+
+    this.clampUINav(levels);
+    int textY = -150;
+    textSize(60);
+    for (int i = 0; i < levels.size(); i++) {
+      if (i == this.itemSelected) {
+        fill(selectionColor);
+      } else {
+        fill(textColor);
+      }
+      text(levels.get(i), 0, textY, this.offset);
+      textY += 100;
+    }
+
+    hint(ENABLE_DEPTH_TEST);
+  }
+
+  void loading() {
+    hint(DISABLE_DEPTH_TEST);
+
+    background(20);
+    textAlign(CENTER, CENTER); textSize(80); fill(0, 255, 0);
+    text("Loading", 0, 0, this.offset);
+
+    hint(ENABLE_DEPTH_TEST);
   }
 
   void pauseMenu() {
     hint(DISABLE_DEPTH_TEST);
 
     background(0, 255, 255);
-    textSize(56); fill(255);
-    text("paused - press space to resume", 0, height / 2, this.offset);
+    textAlign(LEFT, CENTER); textSize(56); fill(255);
+    text("paused - press space to resume", 0, 0, this.offset);
 
     hint(ENABLE_DEPTH_TEST);
   }
@@ -22,8 +105,8 @@ class UI {
     hint(DISABLE_DEPTH_TEST);
 
     background(255, 0, 0);
-    textSize(100); fill(255);
-    text("press any key to start", 0, height / 2, this.offset);
+    textAlign(LEFT, CENTER); textSize(100); fill(255);
+    text("press any key to start", -width / 2, 0, this.offset);
 
     hint(ENABLE_DEPTH_TEST);
   }

@@ -3,5 +3,7 @@ enum GameState {
   M_PAUSED,
   WAIT,
   M_START,
-  M_OPTIONS
+  M_LEVELS,
+  M_OPTIONS,
+  LOAD
 }

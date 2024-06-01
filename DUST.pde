@@ -13,6 +13,9 @@ Map m;
 Utils u;
 UI ui;
 
+String map2Load;
+boolean doneLoading;
+
 int forward, back, right, left;
 
 // keybinds
@@ -26,13 +29,6 @@ float cameraZ; // distance between eye of camera and display
 void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
-
-  m = new Map("maps/newMap.txt");
-  m.generate();
-  m.init();
-  println(m);
-
-  you = new Player(m, chooseMouseSens);
 
   float fov = u.fovX2Y(chooseFov);
   cameraZ = (height / 2.0) / tan(fov / 2.0);
@@ -48,17 +44,19 @@ void setup() {
   }
   noCursor();
 
-  state = GameState.WAIT;
+  state = GameState.M_START;
+  translate(width / 2, height / 2);
+  ui.loading();
 }
 
 void draw() {
   // fix for windowing issues: https://forum.processing.org/two/discussion/23136/fullscreen-mode-with-ubuntu.html
   r.mouseMove(width / 2, height / 2);
-
+  translate(width / 2, height / 2);
+  
   switch (state) {
     case PLAY:
       background(20);
-      translate(width / 2, height / 2);
 
       you.move(passMovementInput(), true);
       // for some reason you can't look while moving with trackpad on my computer
@@ -70,11 +68,25 @@ void draw() {
       drawScene();
       break;
 
+    case M_START:
+      ui.startMenu();
+      break;
+
+    case M_LEVELS:
+      ui.levels();
+      break;
+
+    case LOAD:
+      ui.loading();
+      if (doneLoading) state = GameState.WAIT;
+      break;
+
     case M_PAUSED:
       ui.pauseMenu();
       break;
 
     case WAIT:
+      you = new Player(m, chooseMouseSens);
       ui.waitScreen();
       break;
   }
@@ -154,13 +166,42 @@ void keyPressed() {
       }
       break;
 
+    case M_START:
+      ui.navigateUI();
+      if (ui.isSelectKey()) {
+        switch (ui.itemSelected) {
+          case 0:
+            state = GameState.M_LEVELS;
+            ui.itemSelected = 0;
+            break;
+
+          case 1:
+            // implement options menu
+            break;
+        }
+      }
+      break;
+
+    case M_LEVELS:
+      ui.navigateUI();
+      if (ui.isSelectKey()) {
+        switch (ui.itemSelected) {
+          case 0:
+            map2Load = "maps/newMap.txt";
+            thread("loadMap");
+            state = GameState.LOAD;
+            break;
+        }
+      }
+      break;
+
     case WAIT:
       r.mouseMove(width / 2, height / 2);
       state = GameState.PLAY;
       break;
 
     case M_PAUSED:
-      if (key == ' ') {
+      if (key == ' ' || keyCode == TAB) {
         r.mouseMove(width / 2, height / 2);
         state = GameState.PLAY;
       }
@@ -173,12 +214,15 @@ void keyPressed() {
 }
 
 void keyReleased() {
-  switch (state) {
-    case PLAY:
-      if (key == forwardKey) forward = 0;
-      if (key == backKey) back = 0;
-      if (key == leftKey) left = 0;
-      if (key == rightKey) right = 0;
-      break;
-  }
+  if (key == forwardKey) forward = 0;
+  if (key == backKey) back = 0;
+  if (key == leftKey) left = 0;
+  if (key == rightKey) right = 0;
+}
+
+void loadMap() {
+  doneLoading = false;
+  m = new Map(map2Load);
+  m.init();
+  doneLoading = true;
 }
