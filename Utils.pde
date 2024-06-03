@@ -10,6 +10,18 @@ class Utils {
     return 2 * atan((height / 2.0) / camZ);
   }
 
+  int clamp(int n, int a, int b) {
+    if (a > b) return clamp(n, b, a);
+
+    if (n < a) {
+      return a;
+    } else if (n > b) {
+      return b;
+    } else {
+      return n;
+    }
+  }
+
   Boolean intersectExists(PVector p1, PVector p2, PVector p3, PVector p4) {
     float t = ((p1.x - p3.x) * (p3.y - p4.y) - (p1.y - p3.y) * (p3.x - p4.x)) /
               ((p1.x - p2.x) * (p3.y - p4.y) - (p1.y - p2.y) * (p3.x - p4.x));

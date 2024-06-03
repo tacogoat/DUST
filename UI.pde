@@ -1,4 +1,5 @@
 class UI {
+  Utils u = new Utils();
   float offset;
 
   int itemSelected;
@@ -23,8 +24,18 @@ class UI {
 
   boolean isSelectKey() {
     return key == ' ' ||
-           key == ENTER ||
-           key == RETURN;
+           keyCode == ENTER ||
+           keyCode == RETURN;
+  }
+
+  boolean isBackKey() {
+    if (keyCode == ESC) {
+      key = 0;
+      return true;
+    } else {
+      return keyCode == BACKSPACE ||
+             keyCode == DELETE;
+    }
   }
 
   void startMenu() {
@@ -37,7 +48,7 @@ class UI {
     ArrayList<String> items = new ArrayList<String>();
     items.add("Level Select");
     items.add("Options");
-    items.add("test item");
+    items.add("Exit");
 
     this.clampUINav(items);
     int textY = -50;
@@ -49,6 +60,33 @@ class UI {
         fill(textColor);
       }
       text(items.get(i), 0, textY, this.offset);
+      textY += 100;
+    }
+
+    hint(ENABLE_DEPTH_TEST);
+  }
+
+  void options() {
+    hint(DISABLE_DEPTH_TEST);
+
+    background(20);
+    textAlign(CENTER, TOP); textSize(80); fill(255);
+    text("Options", 0, -300, this.offset);
+
+    ArrayList<String> settings = new ArrayList<String>();
+    settings.add("FOV: " + chooseFov);
+    settings.add("Mouse Sensitivity: " + chooseMouseSens);
+
+    this.clampUINav(settings);
+    int textY = -150;
+    textSize(60);
+    for (int i = 0; i < settings.size(); i++) {
+      if (i == this.itemSelected) {
+        fill(selectionColor);
+      } else {
+        fill(textColor);
+      }
+      text(settings.get(i), 0, textY, this.offset);
       textY += 100;
     }
 
@@ -96,7 +134,7 @@ class UI {
 
     background(0, 255, 255);
     textAlign(LEFT, CENTER); textSize(56); fill(255);
-    text("paused - press space to resume", 0, 0, this.offset);
+    text("paused - press space to resume", -width / 2, 0, this.offset);
 
     hint(ENABLE_DEPTH_TEST);
   }

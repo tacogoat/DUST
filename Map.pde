@@ -120,7 +120,7 @@ class Map {
           break;
 
         case "Texture":
-          this.sectors.get(currentSector).skin = loadImage(elements.get(i + 1));
+          this.sectors.get(currentSector).skin = loadImage("textures/" + elements.get(i + 1));
           i++;
           break;
 

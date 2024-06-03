@@ -15,7 +15,7 @@ class Sector {
     this.ceil = 0.0;
     this.fColor = color(255);
     this.cColor = color(255);
-    this.skin = loadImage("missing.png");
+    this.skin = loadImage("textures/missing.png");
     this.walls = new ArrayList<Wall>();
     this.adjacent = new ArrayList<Integer>();
     this.noClip = false;

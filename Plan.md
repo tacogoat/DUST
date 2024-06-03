@@ -53,3 +53,7 @@ Potential issues:
 
 ## Lights
 - maybe remove lights
+
+## Refactoring
+- make each ui menu into its own class
+- move a bunch of the input processing stuff from main into ui classes
