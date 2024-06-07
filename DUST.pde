@@ -4,11 +4,11 @@ import java.awt.AWTException;
 Player you;
 Robot r;
 
-String chooseMouseSens = "150";
-String chooseFov = "110";
+int userSens = 150; // mouse sensitivity
+int userFov = 110;
 
-String oldSens = "150";
-String oldFov = "110";
+String sensInput = "150";
+String fovInput = "110";
 
 int menuFov = 110;
 
@@ -17,6 +17,12 @@ GameState state;
 Map m;
 Utils u;
 UI ui;
+
+StartMenu start;
+LevelsMenu levels;
+OptionsMenu options;
+
+int itemSelected;
 
 String map2Load;
 boolean doneLoading;
@@ -38,9 +44,13 @@ void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
 
-  initCamera(Integer.parseInt(chooseFov));
+  initCamera(userFov);
 
   ui = new UI(-cameraZ);
+  start = new StartMenu(-cameraZ);
+  levels = new LevelsMenu(-cameraZ);
+  options = new OptionsMenu(-cameraZ);
+  itemSelected = 0;
 
   try {
     r = new Robot();
@@ -88,15 +98,15 @@ void draw() {
       break;
 
     case M_START:
-      ui.startMenu();
+      start.display();
       break;
 
     case M_OPTIONS:
-      ui.options();
+      options.display();
       break;
 
     case M_LEVELS:
-      ui.levels();
+      levels.display();
       break;
 
     case LOAD:
@@ -109,7 +119,7 @@ void draw() {
       break;
 
     case WAIT:
-      you = new Player(m, Integer.parseInt(chooseMouseSens));
+      you = new Player(m, userSens);
       ui.waitScreen();
       break;
   }
@@ -184,122 +194,27 @@ void keyPressed() {
       if (key == leftKey) left = -1;
       if (key == rightKey) right = 1;
 
-      if (keyCode == ESC) {
-        key = 0;
+      if (ui.isEsc()) {
         initCamera();
         state = GameState.M_PAUSED;
       }
       break;
 
     case M_START:
-      ui.navigateUI();
-      if (ui.isBackKey()); // do nothing, stops the window from closing
-
-      if (ui.isSelectKey()) {
-        switch (ui.itemSelected) {
-          case 0:
-            state = GameState.M_LEVELS;
-            ui.itemSelected = 0;
-            break;
-
-          case 1:
-            state = GameState.M_OPTIONS;
-            ui.itemSelected = 0;
-            break;
-
-          case 2:
-            ui.isBackKey();
-            if (ui.isSelectKey()) exit();
-        }
-      }
+      start.handleInput();
       break;
 
     case M_LEVELS:
-      ui.navigateUI();
-      if (ui.isSelectKey()) {
-        switch (ui.itemSelected) {
-          case 0:
-            map2Load = "maps/newMap.txt";
-            thread("loadMap");
-            state = GameState.LOAD;
-            break;
-        }
-      }
-      if (ui.isBackKey()) {
-        state = GameState.M_START;
-      }
+      levels.handleInput();
       break;
 
     case M_OPTIONS:
-      if (isTyping) {
-        switch (ui.itemSelected) {
-          case 0:
-            if (ui.isBackKey()) {
-              chooseFov = oldFov;
-              isTyping = false;
-              ui.selectionColor = color(255, 0, 0);
-            } else if (ui.isSelectKey()) {
-              try {
-                int intFovVal = u.clamp(Integer.parseInt(chooseFov), 30, 150);
-                chooseFov = "" + intFovVal;
-                isTyping = false;
-                ui.selectionColor = color(255, 0, 0);
-              } catch (NumberFormatException e) {
-                chooseFov = "";
-              }
-            } else {
-              chooseFov += key;
-            }
-            break;
-
-          case 1:
-            if (ui.isBackKey()) {
-              chooseMouseSens = oldSens;
-              isTyping = false;
-              ui.selectionColor = color(255, 0, 0);
-            } else if (ui.isSelectKey()) {
-              try {
-                int intSensVal = u.clamp(Integer.parseInt(chooseMouseSens), 25, 400);
-                chooseMouseSens = "" + intSensVal;
-                isTyping = false;
-                ui.selectionColor = color (255, 0, 0);
-              } catch (NumberFormatException e) {
-                chooseMouseSens = "";
-              }
-            } else {
-              chooseMouseSens += key;
-            }
-            break;
-        }
-      } else {
-        ui.navigateUI(); 
-
-        if (ui.isSelectKey()) {
-          ui.selectionColor = color(0, 255, 0);
-          isTyping = true;
-
-          switch (ui.itemSelected) {
-            case 0:
-              oldFov = chooseFov;
-              chooseFov = "";
-              break;
-
-            case 1:
-              oldSens = chooseMouseSens;
-              chooseMouseSens = "";
-              break;
-          }
-        }
-
-        if (ui.isBackKey()) {
-          state = GameState.M_START;
-        }
-      }
+      options.handleInput();
       break;
 
     case WAIT:
       r.mouseMove(width / 2, height / 2);
-      initCamera(Integer.parseInt(chooseFov));
+      initCamera(userFov);
       state = GameState.PLAY;
       break;
 
@@ -307,7 +222,7 @@ void keyPressed() {
       if (key == ' ' || keyCode == ESC) {
         key = 0;
         r.mouseMove(width / 2, height / 2);
-        initCamera(Integer.parseInt(chooseFov));
+        initCamera(userFov);
         state = GameState.PLAY;
       }
 

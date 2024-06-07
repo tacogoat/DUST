@@ -1,25 +1,26 @@
 class UI {
-  Utils u = new Utils();
   float offset;
-
-  int itemSelected;
 
   color selectionColor = color(255, 0, 0);
   color textColor = color(255);
 
+  int titleSize = 100;
+  int normalSize = 80;
+  int smallSize = 60;
+
   UI(float z) {
     this.offset = z;
-    this.itemSelected = 0;
+    itemSelected = 0;
   }
 
   void navigateUI() {
-    if (key == forwardKey || keyCode == UP) this.itemSelected--;
-    if (key == backKey || keyCode == DOWN) this.itemSelected++;
+    if (key == forwardKey || keyCode == UP) itemSelected--;
+    if (key == backKey || keyCode == DOWN) itemSelected++;
   }
 
   void clampUINav(ArrayList<String> list) {
-    if (this.itemSelected < 0) this.itemSelected = list.size() - 1;
-    if (this.itemSelected >= list.size()) this.itemSelected = 0;
+    if (itemSelected < 0) itemSelected = list.size() - 1;
+    if (itemSelected >= list.size()) itemSelected = 0;
   }
 
   boolean isSelectKey() {
@@ -28,95 +29,19 @@ class UI {
            keyCode == RETURN;
   }
 
-  boolean isBackKey() {
+  boolean isEsc() {
     if (keyCode == ESC) {
       key = 0;
       return true;
     } else {
-      return keyCode == BACKSPACE ||
-             keyCode == DELETE;
+      return false;
     }
   }
 
-  void startMenu() {
-    hint(DISABLE_DEPTH_TEST);
-
-    background(20);
-    textAlign(CENTER, TOP); textSize(100); fill(255);
-    text("DUST", 0, -300, this.offset);
-
-    ArrayList<String> items = new ArrayList<String>();
-    items.add("Level Select");
-    items.add("Options");
-    items.add("Exit");
-
-    this.clampUINav(items);
-    int textY = -50;
-    textSize(80);
-    for (int i = 0; i < items.size(); i++) {
-      if (i == this.itemSelected) {
-        fill(selectionColor);
-      } else {
-        fill(textColor);
-      }
-      text(items.get(i), 0, textY, this.offset);
-      textY += 100;
-    }
-
-    hint(ENABLE_DEPTH_TEST);
-  }
-
-  void options() {
-    hint(DISABLE_DEPTH_TEST);
-
-    background(20);
-    textAlign(CENTER, TOP); textSize(80); fill(255);
-    text("Options", 0, -300, this.offset);
-
-    ArrayList<String> settings = new ArrayList<String>();
-    settings.add("FOV: " + chooseFov);
-    settings.add("Mouse Sensitivity: " + chooseMouseSens);
-
-    this.clampUINav(settings);
-    int textY = -150;
-    textSize(60);
-    for (int i = 0; i < settings.size(); i++) {
-      if (i == this.itemSelected) {
-        fill(selectionColor);
-      } else {
-        fill(textColor);
-      }
-      text(settings.get(i), 0, textY, this.offset);
-      textY += 100;
-    }
-
-    hint(ENABLE_DEPTH_TEST);
-  }
-
-  void levels() {
-    hint(DISABLE_DEPTH_TEST);
-
-    background(20);
-    textAlign(CENTER, TOP); textSize(80); fill(255);
-    text("Level Select", 0, -300, this.offset);
-
-    ArrayList<String> levels = new ArrayList<String>();
-    levels.add("Castle of Torment");
-
-    this.clampUINav(levels);
-    int textY = -150;
-    textSize(60);
-    for (int i = 0; i < levels.size(); i++) {
-      if (i == this.itemSelected) {
-        fill(selectionColor);
-      } else {
-        fill(textColor);
-      }
-      text(levels.get(i), 0, textY, this.offset);
-      textY += 100;
-    }
-
-    hint(ENABLE_DEPTH_TEST);
+  boolean isBackKey() {
+    return this.isEsc() ||
+           keyCode == BACKSPACE ||
+           keyCode == DELETE;
   }
 
   void loading() {
