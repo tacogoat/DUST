@@ -26,7 +26,7 @@ class LevelsMenu extends UI {
     this.navigateUI();
 
     if (this.isSelectKey()) {
-      switch(itemSelected) {
+      switch (itemSelected) {
         case 0:
           map2Load = "maps/newMap.txt";
           thread("loadMap");

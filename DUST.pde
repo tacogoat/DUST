@@ -21,11 +21,14 @@ UI ui;
 StartMenu start;
 LevelsMenu levels;
 OptionsMenu options;
+PauseMenu paused;
 
 int itemSelected;
 
 String map2Load;
 boolean doneLoading;
+
+boolean inGame;
 
 int forward, back, right, left;
 
@@ -46,10 +49,13 @@ void setup() {
 
   initCamera(userFov);
 
+  inGame = false;
+
   ui = new UI(-cameraZ);
   start = new StartMenu(-cameraZ);
   levels = new LevelsMenu(-cameraZ);
   options = new OptionsMenu(-cameraZ);
+  paused = new PauseMenu(-cameraZ);
   itemSelected = 0;
 
   try {
@@ -115,7 +121,7 @@ void draw() {
       break;
 
     case M_PAUSED:
-      ui.pauseMenu();
+      paused.display();
       break;
 
     case WAIT:
@@ -213,22 +219,15 @@ void keyPressed() {
       break;
 
     case WAIT:
+      ui.isEsc();
       r.mouseMove(width / 2, height / 2);
       initCamera(userFov);
+      inGame = true;
       state = GameState.PLAY;
       break;
 
     case M_PAUSED:
-      if (key == ' ' || keyCode == ESC) {
-        key = 0;
-        r.mouseMove(width / 2, height / 2);
-        initCamera(userFov);
-        state = GameState.PLAY;
-      }
-
-      if (keyCode == TAB) {
-        state = GameState.PLAY;
-      }
+      paused.handleInput();
       break;
   }
 }

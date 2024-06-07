@@ -15,7 +15,7 @@ class UI {
 
   void navigateUI() {
     if (key == forwardKey || keyCode == UP) itemSelected--;
-    if (key == backKey || keyCode == DOWN) itemSelected++;
+    if (key == backKey || keyCode == DOWN || keyCode == TAB) itemSelected++;
   }
 
   void clampUINav(ArrayList<String> list) {
