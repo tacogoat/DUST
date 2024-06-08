@@ -8,7 +8,7 @@ class Player {
 
   float vertTheta;
 
-  float maxV = 16.0;
+  float maxV = 20.0;
   float vEase = 0.2;
 
   float collisionConstant = 4.0;

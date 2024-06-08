@@ -1,0 +1,806 @@
+# Map 2: Kat Place probably (backrooms simulator)
+# this is gonna take me 4 hours aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+StartPos 49 87
+StartDir N
+StartSect 0
+
+
+
+# 0: starter room
+
+Sector
+Adjacent 1;5;12;20
+Texture wall_07.jpg
+FloorColor 178;165;165
+CeilColor 178;165;165
+Floor 0
+Ceil 10
+40 84
+40 82
+44 78
+46 78 Window
+52 78
+54 78
+58 82
+58 84 Window
+58 90
+58 92
+54 96
+52 96 Window
+46 96
+44 96
+40 92
+40 90 Window
+
+
+
+# 1: weird hall
+
+Sector
+Adjacent 0;2;3
+Texture wall_19.jpg
+FloorColor 211;202;96
+CeilColor 232;162;231
+Floor 0
+Ceil 8
+40 84
+32 84
+32 72
+20 72 Window
+20 78
+26 78
+26 100 Window
+32 100
+32 90
+40 90 Window
+
+
+
+# 2: shoe room
+
+Sector
+Adjacent 1
+Texture building_01.jpg
+FloorColor 181;185;152
+CeilColor 181;185;152
+Floor 0
+Ceil 12
+26 100 Window
+32 100
+36 100
+36 112
+8 112
+8 96
+20 96
+24 100
+
+
+
+# 3: hammer room
+
+Sector
+Adjacent 1;6
+Texture building_01.jpg
+FloorColor 181;185;152
+CeilColor 181;185;152
+Floor 0
+Ceil 12
+16 84
+16 88
+4 88
+4 84
+0 80
+0 68
+4 64
+4 56
+6 56 Window
+10 56
+12 56
+16 60
+16 66
+20 70
+20 72 Window
+20 78
+20 80
+
+
+
+# 4: animal hall
+
+Sector
+Adjacent 3;23
+Texture wall_09.jpg
+FloorColor 234;168;169
+CeilColor 234;168;169
+Floor 0
+Ceil 6
+6 56
+6 50
+14 50
+14 48 Window
+18 48
+18 50
+26 50
+26 48 Window
+30 48
+30 54
+10 54
+10 56 Window
+
+
+
+# 5: north hall
+
+Sector
+Adjacent 0;6
+Texture wall_03.jpg
+FloorColor 234;193;104
+CeilColor 234;193;104
+Floor 0
+Ceil 8
+46 96 Window
+52 96
+52 104 Window
+46 104
+
+
+
+# 6: T room
+
+Sector
+Adjacent 5;7;8;10;24
+Texture wall_07.jpg
+FloorColor 178;165;165
+CeilColor 178;165;165
+Floor 0
+Ceil 14
+46 104 Window
+52 104
+56 104
+56 120
+72 120 Window
+72 134
+68 134 Window
+60 134
+52 134 Window
+44 134
+42 134
+38 130
+24 130 Window
+24 116
+42 116
+42 104
+
+
+
+# 7: curved room
+
+Sector
+Adjacent 6
+Texture building_01.jpg
+FloorColor 181;185;152
+CeilColor 181;185;152
+Floor 0
+Ceil 16
+24 130
+24 148
+16 148
+8 144
+4 140
+0 132
+0 118
+4 114
+24 114
+24 116 Window
+
+
+
+# 8: stub hall 1
+
+Sector
+Adjacent 6;9
+Texture wall_09.jpg
+FloorColor 234;168;169
+CeilColor 234;168;169
+Floor 0
+Ceil 8
+44 134 Window
+52 134
+52 140 Window
+44 140
+
+
+
+# 9: not square room
+
+Sector
+Adjacent 8
+Texture metal_01.jpg
+FloorColor 173;198;211
+CeilColor 173;198;211
+Floor 0
+Ceil 12
+44 140 Window
+52 140
+54 140
+54 152
+46 152
+42 148
+42 140
+
+
+
+# 10: stub hall 2
+
+Sector
+Adjacent 6;11
+Texture wall_09.jpg
+FloorColor 234;168;169
+CeilColor 234;168;169
+Floor 0
+Ceil 8
+60 134 Window
+68 134
+68 140 Window
+60 140
+
+
+
+# 11: square room
+
+Sector
+Adjacent 10
+Texture metal_01.jpg
+FloorColor 173;198;211
+CeilColor 173;198;211
+Floor 0
+Ceil 12
+60 140 Window
+68 140
+70 140
+70 152
+58 152
+58 140
+
+
+
+# 12: east hall
+
+Sector
+Adjacent 0;13
+Texture building_01.jpg
+FloorColor 181;185;152
+CeilColor 181;185;152
+Floor 0
+Ceil 8
+58 84
+76 84 Window
+76 90
+58 90 Window
+
+
+
+# 13: station
+
+Sector
+Adjacent 6;12;14;15;16;17;18;19
+Texture wall_07.jpg
+FloorColor 178;165;165
+CeilColor 158;145;145
+Floor 0
+Ceil 24
+76 90 Window
+76 84
+76 80
+84 76
+88 76 Window
+92 76
+96 76 Window
+104 76
+116 80
+116 104
+120 112
+120 138
+116 146
+108 146
+100 150
+92 150
+84 146
+76 146
+72 138
+72 134 Window
+72 120
+72 112
+76 104
+
+
+
+# 14: pillar 1
+
+Sector
+Texture wall_09.jpg
+Floor 0
+Ceil 24
+82 112
+88 112
+88 106
+82 106
+
+
+
+# 15: pillar 2
+
+Sector
+Texture wall_09.jpg
+Floor 0
+Ceil 24
+104 112
+110 112
+110 106
+104 106
+
+
+
+# 16: pillar 3
+
+Sector
+Texture wall_09.jpg
+Floor 0
+Ceil 24
+82 134
+88 134
+88 128
+82 128
+
+
+
+# 17: pillar 4
+
+Sector
+Texture wall_09.jpg
+Floor 0
+Ceil 24
+104 134
+110 134
+110 128
+104 128
+
+
+
+# 18: snake hall
+
+Sector
+Adjacent 13;21
+Texture wall_03.jpg
+FloorColor 234;193;104
+CeilColor 234;193;104
+Floor 0
+Ceil 6
+88 76 Window
+92 76
+92 68
+68 68
+68 72
+60 72
+60 68 Window
+56 68
+56 76
+72 76
+72 72
+88 72
+
+
+
+# 19: pipe hall
+
+Sector
+Adjacent 13;23
+Texture metal_01.jpg
+FloorColor 173;198;211
+CeilColor 173;198;211
+Floor 0
+Ceil 10
+96 76 Window
+104 76
+104 48 Window
+96 48
+
+
+
+# 20: south hall
+
+Sector
+Adjacent 0;21
+Texture metal_01.jpg
+FloorColor 173;198;211
+CeilColor 173;198;211
+Floor 0
+Ceil 8
+46 78 Window
+52 78
+52 68 Window
+46 68
+
+
+
+# 21: octogon room
+
+Sector
+Adjacent 20;18;22
+Texture building_01.jpg
+FloorColor 181;185;152
+CeilColor 181;185;152
+Floor 0
+Ceil 14
+40 68
+46 68 Window
+52 68
+56 68 Window
+60 68
+64 68
+68 64
+68 62 Window
+68 54
+68 52
+64 48
+40 48
+36 52
+36 64
+
+
+
+# 22: J room
+
+Sector
+Adjacent 21;23
+Texture wall_07.jpg
+FloorColor 178;165;165
+CeilColor 178;165;165
+Floor 0
+Ceil 10
+68 62
+92 62
+92 48 Window
+84 48
+84 54
+68 54 Window
+
+
+
+# 23: big room
+
+Sector
+Adjacent 4;19;22;24
+Texture wall_19.jpg
+FloorColor 211;202;96
+CeilColor 232;162;231
+Floor 0
+Ceil 20
+104 48
+108 48
+116 40
+116 16
+108 8
+80 8
+72 0
+44 0
+36 8
+8 8
+0 16
+0 40
+8 48
+14 48 Window
+18 48
+26 48 Window
+30 48
+36 48
+44 40
+72 40
+80 48
+84 48 Window
+92 48
+96 48 Window
+
+
+
+# 24: sign
+
+Sector
+Texture sign_11.jpg
+Floor 0
+Ceil 20
+68 28
+52 28
+52 12
+68 12
+
+
+
+# transistion (starter room to weird hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 10
+40 84
+40 90 Window
+
+
+
+# transition (starter room to north hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 10
+46 96
+52 96 Window
+
+
+
+# transition (starter room to east hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 10
+58 84
+58 90 Window
+
+
+
+# transition (starter room to south hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 10
+46 78
+52 78 Window
+
+
+
+# transition (weird hall to shoe room)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 8
+Ceil 12
+26 100
+32 100 Window
+
+
+
+# transition (hammer room to weird hall)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 8
+Ceil 12
+20 78
+20 72 Window
+
+
+
+# transition (hammer room to animal hall)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 6
+Ceil 12
+6 56
+10 56 Window
+
+
+
+# transition (animal hall to big room)
+
+Sector
+NoClip
+Texture wall_19.jpg
+Floor 6
+Ceil 20
+14 48
+18 48 Window
+
+
+
+# transition (animal hall to big room)
+
+Sector
+NoClip
+Texture wall_19.jpg
+Floor 6
+Ceil 20
+26 48
+30 48 Window
+
+
+
+# transition (big room to J hall)
+
+Sector
+NoClip
+Texture wall_19.jpg
+Floor 10
+Ceil 20
+84 48
+92 48 Window
+
+
+
+# transition (big room to pipe hall)
+
+Sector
+NoClip
+Texture wall_19.jpg
+Floor 10
+Ceil 20
+96 48
+104 48 Window
+
+
+
+# transition (J hall to octogon room)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 10
+Ceil 14
+68 62
+68 54 Window
+
+
+
+# transition (snake hall to octogon room)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 6
+Ceil 14
+56 68
+60 68 Window
+
+
+
+# transition (south hall to octogon room)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 8
+Ceil 14
+46 68
+52 68 Window
+
+
+
+# transition (east hall to station)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 24
+76 90
+76 84 Window
+
+
+
+# transition (snake hall to station)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 6
+Ceil 24
+88 76
+92 76 Window
+
+
+
+# transition (pipe hall to station)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 10
+Ceil 24
+96 76
+104 76 Window
+
+
+
+# transition (T room to station)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 14
+Ceil 24
+72 134
+72 120 Window
+
+
+
+# transition (T room to north hall)
+
+Sector
+NoClip
+Texture sign_24.jpg
+Floor 8
+Ceil 14
+52 104
+46 104 Window
+
+
+
+# transition (T room to stub hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 14
+60 134
+68 134 Window
+
+
+
+# transition (T room to stub hall)
+
+Sector
+NoClip
+Texture wall_07.jpg
+Floor 8
+Ceil 14
+44 134
+52 134 Window
+
+
+
+# transition (square room to stub hall)
+
+Sector
+NoClip
+Texture metal_01.jpg
+Floor 8
+Ceil 12
+60 140
+68 140 Window
+
+
+
+# transition (not square room to stub hall)
+
+Sector
+NoClip
+Texture metal_01.jpg
+Floor 8
+Ceil 12
+44 140
+52 140 Window
+
+
+
+# transition (T room to curved room)
+
+Sector
+NoClip
+Texture building_01.jpg
+Floor 14
+Ceil 16
+24 130
+24 116 Window
+
+End

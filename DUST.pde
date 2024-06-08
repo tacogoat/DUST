@@ -202,6 +202,7 @@ void keyPressed() {
 
       if (ui.isEsc()) {
         initCamera();
+        itemSelected = 0;
         state = GameState.M_PAUSED;
       }
       break;

@@ -6,6 +6,7 @@ class LevelsMenu extends UI {
     super(z);
     this.levels = new ArrayList<String>();
     this.levels.add("Castle of Torment");
+    this.levels.add("Kat Place");
     this.list = new UIList(this, this.levels, -150, 100);
   }
 
@@ -29,6 +30,12 @@ class LevelsMenu extends UI {
       switch (itemSelected) {
         case 0:
           map2Load = "maps/newMap.txt";
+          thread("loadMap");
+          state = GameState.LOAD;
+          break;
+
+        case 1:
+          map2Load = "maps/realMap.txt";
           thread("loadMap");
           state = GameState.LOAD;
           break;

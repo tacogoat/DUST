@@ -1,0 +1,23 @@
+Map formatting guide: (not a map)
+
+
+StartPos x z            coords can be int or float
+StartDir dir            dir is N, S, E, W, direction player faces
+StartSect n
+
+# comment               keep track of sector names and indices in comments
+it doesn't matter where # you put the hashtag, always a full line comment
+
+Sector
+NoClip                  will not check sector for collisions
+Adjacent a;b;c;d        a b c and d should be sector indices
+Texture file.jpg
+FloorColor r;g;b
+CeilColor n             colors can be rgb or grayscale
+Floor y
+Ceil y                  floor and ceiling height
+x1 z1
+x2 z2 Window            does not render wall between this and next point
+x3 z3
+
+End                     remember end otherwise it will break things
