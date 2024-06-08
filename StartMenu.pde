@@ -41,7 +41,10 @@ class StartMenu extends UI {
           break;
 
         case 2:
-          if (this.isSelectKey()) exit();
+          if (this.isSelectKey()) {
+            saveSettings();
+            exit();
+          }
           break;
       }
     }

@@ -8,18 +8,15 @@ class Player {
 
   float vertTheta;
 
-  float mouseSens;
-
   float maxV = 16.0;
   float vEase = 0.2;
 
   float collisionConstant = 4.0;
 
-  Player(Map m_, int sens) {
+  Player(Map m_) {
     this.v = new PVector(0.0, 0.0);
     this.m = m_;
     this.currentSector = m_.startSect;
-    this.mouseSens = sens / 15000.0;
   }
   
   void move(PVector input, boolean rawInput) {
@@ -80,7 +77,7 @@ class Player {
   }
 
   void look(PVector lookVals) {
-    lookVals.mult(mouseSens);
+    lookVals.mult(userSens / 15000.0);
     this.m.rotate(lookVals.x);
     vertTheta += lookVals.y;
     vertTheta = constrain(vertTheta, -HALF_PI, HALF_PI);

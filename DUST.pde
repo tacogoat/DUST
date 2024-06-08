@@ -4,11 +4,11 @@ import java.awt.AWTException;
 Player you;
 Robot r;
 
-int userSens = 150; // mouse sensitivity
-int userFov = 110;
+int userSens; // mouse sensitivity
+int userFov;
 
-String sensInput = "150";
-String fovInput = "110";
+String sensInput;
+String fovInput;
 
 int menuFov = 110;
 
@@ -47,7 +47,9 @@ void setup() {
   fullScreen(P3D, SPAN);
   u = new Utils();
 
-  initCamera(userFov);
+  loadSettings();
+
+  initCamera();
 
   inGame = false;
 
@@ -67,7 +69,6 @@ void setup() {
 
   state = GameState.M_START;
   translate(width / 2, height / 2);
-  ui.loading();
 }
 
 void initCamera(int fovVal) {
@@ -125,7 +126,6 @@ void draw() {
       break;
 
     case WAIT:
-      you = new Player(m, userSens);
       ui.waitScreen();
       break;
   }
@@ -249,5 +249,35 @@ void loadMap() {
   doneLoading = false;
   m = new Map(map2Load);
   m.init();
+  you = new Player(m);
   doneLoading = true;
+}
+
+void loadSettings() {
+  String[] arr = loadStrings("settings.txt");
+  for (int i = 0; i < arr.length; i++) {
+    Scanner s = new Scanner(arr[i]);
+    while (s.hasNext()) {
+      switch (s.next()) {
+        case "FOV":
+          String fovVal = s.next();
+          userFov = Integer.parseInt(fovVal);
+          fovInput = fovVal;
+          break;
+
+        case "MouseSens":
+          String sensVal = s.next();
+          userSens = Integer.parseInt(sensVal);
+          sensInput = sensVal;
+          break;
+      }
+    }
+  }
+}
+
+void saveSettings() {
+  String[] arr = new String[2];
+  arr[0] = "FOV " + userFov;
+  arr[1] = "MouseSens " + userSens;
+  saveStrings("data/settings.txt", arr);
 }
